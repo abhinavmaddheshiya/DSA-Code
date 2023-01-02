@@ -1,0 +1,38 @@
+//TLE
+MY APPROACH:
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> result;
+        set<vector<int>> s;
+        for(int first=0;first<nums.size();first++){
+            int second = first+1;
+            int third = nums.size()-1;
+            while(second<third){
+                if(nums[first]+nums[second]+nums[third]==0){
+                    vector<int> v;
+                    v.push_back(nums[first]);
+                    v.push_back(nums[second]);
+                    v.push_back(nums[third]);
+                    s.insert(v);
+                    second++;
+                    third--;
+                }
+                else if(nums[first]+nums[second]+nums[third]<0){
+                    second++;
+                }
+                else{
+                    third--;
+                }
+            }
+        }
+        set<vector<int>>:: iterator it=s.begin();
+        while(!s.empty()){
+            result.push_back(*it);
+            s.erase(it);
+            it++;
+        }
+        return result;
+    }
+};
